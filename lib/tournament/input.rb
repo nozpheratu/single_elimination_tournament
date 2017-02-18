@@ -5,10 +5,11 @@ module Tournament
     attr_accessor :data
 
     def initialize
-      cli = HighLine.new
-      name = cli.ask("Winner Name?  ", String)
-      cli.say("This should be <%= color('#{name}', BOLD) %>!")
-      @data = name
+      @cli = HighLine.new
+    end
+
+    def prompt(question)
+      @cli.ask(question)
     end
   end
 end

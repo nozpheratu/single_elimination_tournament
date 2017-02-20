@@ -34,7 +34,7 @@ module Tournament
       # There will always be at minimum two rounds if the registration initial_count
       # is not devisible by two.
       # Setup round 1
-      rounds << (@players_pool.remanining / 2).times.map do
+      rounds << (@players_pool.remaining / 2).times.map do
         {
           :round => 1,
           :home_id => @players_pool.take_random,
@@ -63,6 +63,8 @@ module Tournament
       rounds = []
       round_i = initial_count
       (required_rounds).times do |i|
+        puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        puts round_i
         rounds << (round_i /= 2).times.map do
           {
             :round => i + 1,

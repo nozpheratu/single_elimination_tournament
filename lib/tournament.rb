@@ -1,4 +1,5 @@
 require_relative 'tournament/renderer'
+require_relative 'tournament/bracket'
 require 'csv'
 
 module Tournament
@@ -6,6 +7,9 @@ module Tournament
     def run(path)
       contestants = parse_names(path)
       puts contestants
+      bracket = Bracket.new(contestants)
+      puts bracket.tree
+      puts bracket.tree.length
     end
 
     private

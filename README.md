@@ -1,9 +1,11 @@
 # single_elimination_tournament
 [![Build Status](https://travis-ci.org/nozpheratu/single_elimination_tournament.svg?branch=master)](https://travis-ci.org/nozpheratu/single_elimination_tournament)
+
 A Ruby CLI application for creating single elimination tournaments.
 
 ## usage
-Simply executed the included rake task with a path to line-delimited list of players, sample csvs are provided in the *sample* folder.
+Simply clone the project, run bundler, and execute the included rake task with a path to line-delimited list of players, sample csvs are
+provided in the *sample* folder.
 ```
 rake run[sample/contestants-even.csv]
 ```

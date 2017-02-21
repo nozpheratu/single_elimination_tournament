@@ -1,17 +1,23 @@
-require_relative './player_pool'
-require 'highline'
 require 'ap'
+require 'highline'
+require_relative './player_pool'
 
 module Tournament
+  # This class is responsible for filling in all the blanks for the tournament
+  # a passed partial bracket. Blank data includes any matches there were
+  # determined to be necessary but weren't assiged a player (either home or
+  # away) - player assignment will occur automatically. This class will also
+  # prompt the user to decide on the outcome for every match in the bracket
+  # using a CLI.
   class Input
     attr_accessor :tree
 
     def initialize(bracket)
-      rounds = bracket.tree.group_by {|t| t[:round] }
+      rounds = bracket.tree.group_by { |t| t[:round] }
       rounds.each do |round, matches|
         ap "Round: #{round}"
         previous_round = rounds[round - 1] || []
-        players = previous_round.map {|match| match[:winner_id] }
+        players = previous_round.map { |match| match[:winner_id] }
         player_pool = PlayerPool.new(players)
         matches.each do |match|
           options = [match[:home_id], match[:away_id]]
@@ -20,11 +26,11 @@ module Tournament
             menu.select_by = :index
           end
           # re-assign home & away in case they were assigned in this iteration
-          match[:home_id] = options[0] ; match[:away_id] = options[1]
+          match[:home_id] = options[0]; match[:away_id] = options[1]
         end
       end
       # un-group the tournament tree
-      @tree = (rounds.map {|_, round| round}).flatten
+      @tree = (rounds.map { |_, round| round }).flatten
     end
 
     private

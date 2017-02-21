@@ -6,7 +6,7 @@ module Tournament
 
     def initialize(contestants)
       @players_pool = Tournament::PlayerPool.new(contestants)
-      rounds = power_of_two?(initial_count) ? generate_bye_rounds : generate_rounds
+      rounds = power_of_two?(initial_count) ? generate_rounds : generate_bye_rounds
       @tree = rounds.flatten
     end
 
@@ -63,8 +63,6 @@ module Tournament
       rounds = []
       round_i = initial_count
       (required_rounds).times do |i|
-        puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-        puts round_i
         rounds << (round_i /= 2).times.map do
           {
             :round => i + 1,

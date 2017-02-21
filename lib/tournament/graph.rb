@@ -28,7 +28,7 @@ module Tournament
         # Node & edge setup
         matches.each do |match|
           match_edge = matches.find {|e| e[:round] == match[:round] + 1 && [e[:home_id], e[:away_id]].include?(match[:winner_id])}
-          node(match.object_id).label "R:#{match[:round]}\n#{match[:home_id]}\nvs.\n#{match[:away_id]}"
+          node(match.object_id).label "#{match[:home_id]}\nvs.\n#{match[:away_id]}"
           edge match.object_id, match_edge.object_id unless match_edge.nil?
         end
 

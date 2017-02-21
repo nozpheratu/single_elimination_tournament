@@ -20,8 +20,8 @@ require_relative 'tournament/graph'
 module Tournament
   class << self
     def run(path)
-      contestants = parse_names(path)
-      partial_bracket = Bracket.new(contestants)
+      players = parse_names(path)
+      partial_bracket = Bracket.new(players)
       complete_bracket = Input.new(partial_bracket)
       Graph.new(complete_bracket.tree)
     end

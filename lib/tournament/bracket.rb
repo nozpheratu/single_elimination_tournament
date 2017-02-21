@@ -1,6 +1,12 @@
 require_relative './player_pool'
 
 module Tournament
+  # This class is responsible for transforming a list of players to an array of
+  # matches in a single elimination competition bracket format. It will
+  # automatically determine the initial match lineup and give players "byes" for
+  # the first round (see https://en.wikipedia.org/wiki/Bye_%28sports%29) to
+  # balance the bracket such there there will be an even number of participants
+  # for the semifinal & final rounds.
   class Bracket
     attr_reader :tree
 
@@ -13,7 +19,7 @@ module Tournament
     private
 
     def power_of_two?(number)
-      number != 0 && number & (number - 1) == 0
+      (number.nonzero? && number & (number - 1)).zero?
     end
 
     def initial_count
@@ -24,36 +30,33 @@ module Tournament
       @required_rounds = Math.log2(initial_count).ceil
     end
 
+    def byes
+      (2**required_rounds) - initial_count
+    end
+
     def generate_bye_rounds
-      # "Byes" need to be added if the number of participants is not a power of
-      # two. See https://en.wikipedia.org/wiki/Bye_%28sports%29
       rounds = []
-      byes = (2 ** required_rounds) - initial_count
-      bye_pool_players = byes.times.map { @players_pool.take_random }
+      bye_pool_players = Array.new(byes) { @players_pool.take_random }
       bye_pool = Tournament::PlayerPool.new(bye_pool_players)
-      # There will always be at minimum two rounds if the registration initial_count
-      # is not devisible by two.
-      # Setup round 1
-      rounds << (@players_pool.remaining / 2).times.map do
+      rounds << Array.new(@players_pool.remaining / 2) do
         {
-          :round => 1,
-          :home_id => @players_pool.take_random,
-          :away_id => @players_pool.take_random
+          round:  1,
+          home_id:  @players_pool.take_random,
+          away_id:  @players_pool.take_random
         }
       end
-      # Setup round 2
-      rounds << ((byes + ((initial_count - byes))/2) / 2).times.map do
+      rounds << Array.new((byes + ((initial_count - byes)) / 2) / 2) do
         {
-          :round => 2,
-          :home_id => bye_pool.take_random,
-          :away_id => (bye_pool.take_random if bye_pool.remaining > rounds[0].length)
+          round:  2,
+          home_id:  bye_pool.take_random,
+          away_id:  (bye_pool.take_random if bye_pool.remaining > rounds[0].length)
         }
       end
       # Handle any remaining rounds
       rounds_remaining = required_rounds - rounds.size
       rounds_remaining.times do |round|
-        rounds << (rounds.last.size / 2).times.map do
-          { :round => (round + 1) + 2, :home_id => nil, :away_id => nil }
+        rounds << Array.new(rounds.last.size / 2) do
+          { round:  (round + 1) + 2, home_id:  nil, away_id: nil }
         end
       end
       rounds
@@ -62,12 +65,12 @@ module Tournament
     def generate_rounds
       rounds = []
       round_i = initial_count
-      (required_rounds).times do |i|
-        rounds << (round_i /= 2).times.map do
+      required_rounds.times do |i|
+        rounds << Array.new(round_i /= 2) do
           {
-            :round => i + 1,
-            :home_id => @players_pool.take_random,
-            :away_id => @players_pool.take_random
+            round:  i + 1,
+            home_id:  @players_pool.take_random,
+            away_id:  @players_pool.take_random
           }
         end
       end

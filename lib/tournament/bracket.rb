@@ -41,22 +41,22 @@ module Tournament
       rounds << Array.new(@players_pool.remaining / 2) do
         {
           round:  1,
-          home_id:  @players_pool.take_random,
-          away_id:  @players_pool.take_random
+          home:  @players_pool.take_random,
+          away:  @players_pool.take_random
         }
       end
       rounds << Array.new((byes + ((initial_count - byes)) / 2) / 2) do
         {
           round:  2,
-          home_id:  bye_pool.take_random,
-          away_id:  (bye_pool.take_random if bye_pool.remaining > rounds[0].length)
+          home:  bye_pool.take_random,
+          away:  (bye_pool.take_random if bye_pool.remaining > rounds[0].length)
         }
       end
       # Handle any remaining rounds
       rounds_remaining = required_rounds - rounds.size
       rounds_remaining.times do |round|
         rounds << Array.new(rounds.last.size / 2) do
-          { round:  (round + 1) + 2, home_id:  nil, away_id: nil }
+          { round:  (round + 1) + 2, home:  nil, away: nil }
         end
       end
       rounds
@@ -69,8 +69,8 @@ module Tournament
         rounds << Array.new(round_i /= 2) do
           {
             round:  i + 1,
-            home_id:  @players_pool.take_random,
-            away_id:  @players_pool.take_random
+            home:  @players_pool.take_random,
+            away:  @players_pool.take_random
           }
         end
       end

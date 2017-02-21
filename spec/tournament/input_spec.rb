@@ -7,15 +7,15 @@ RSpec.shared_examples "a valid tree" do
     expect(completed_tree).to_not include nil
   end
 
-  it "has a winner_id is assigned on each match" do
+  it "has a winner is assigned on each match" do
     completed_tree = Tournament::Input.new(partial_tree).tree
-    expect(completed_tree.map{|m| m[:winner_id]}.length).to eq assigned_tree.length
+    expect(completed_tree.map{|m| m[:winner]}.length).to eq assigned_tree.length
   end
 end
 
 describe Tournament::Input do
   let(:partial_tree) { double(tree: assigned_tree) }
-  let(:tree) { [{round: 1, home_id: "A", away_id: "B"}, {round: 1, home_id: "C", away_id: "D"}] }
+  let(:tree) { [{round: 1, home: "A", away: "B"}, {round: 1, home: "C", away: "D"}] }
   let(:tree_with_byes ) do
     Tournament::Bracket.new(["player"] * 15).tree
   end

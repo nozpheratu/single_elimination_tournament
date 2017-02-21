@@ -31,13 +31,13 @@ module Tournament
         # Node & edge setup
         matches.each do |match|
           match_edge = matches.find do |e|
-            e[:round] == match[:round] + 1 && [e[:home_id], e[:away_id]].include?(match[:winner_id])
+            e[:round] == match[:round] + 1 && [e[:home], e[:away]].include?(match[:winner])
           end
-          node(match.object_id).label "#{match[:home_id]}\nvs.\n#{match[:away_id]}"
+          node(match.object_id).label "#{match[:home]}\nvs.\n#{match[:away]}"
           edge match.object_id, match_edge.object_id unless match_edge.nil?
         end
 
-        node("winner").label final[:winner_id]
+        node("winner").label final[:winner]
 
         edge final.object_id, "winner"
 
@@ -46,7 +46,7 @@ module Tournament
         sorted_matches.group_by { |match| match[:round] }.map do |_, round_matches|
           colour += 1 unless colour >= 8
           round_matches.each do |match|
-            unless match[:winner_id].nil?
+            unless match[:winner].nil?
               eval("c#{colour}") << node(match.object_id)
             end
           end

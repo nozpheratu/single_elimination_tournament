@@ -17,16 +17,16 @@ module Tournament
       rounds.each do |round, matches|
         ap "Round: #{round}"
         previous_round = rounds[round - 1] || []
-        players = previous_round.map { |match| match[:winner_id] }
+        players = previous_round.map { |match| match[:winner] }
         player_pool = PlayerPool.new(players)
         matches.each do |match|
-          options = [match[:home_id], match[:away_id]]
+          options = [match[:home], match[:away]]
           options.map! { |o| o || player_pool.take_random } if player_pool
-          match[:winner_id] = cli.choose(*options) do |menu|
+          match[:winner] = cli.choose(*options) do |menu|
             menu.select_by = :index
           end
           # re-assign home & away in case they were assigned in this iteration
-          match[:home_id] = options[0]; match[:away_id] = options[1]
+          match[:home] = options[0]; match[:away] = options[1]
         end
       end
       # un-group the tournament tree

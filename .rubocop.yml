@@ -1,0 +1,13 @@
+Style/RaiseArgs:
+  Enabled: false
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 15
+
+Metrics/LineLength:
+  Max: 100
+
+Style/StringLiterals:
+  Enabled: false
+

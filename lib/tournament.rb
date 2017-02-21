@@ -10,9 +10,7 @@ require_relative 'tournament/graph'
 # been decided, a tournament bracket/tree digram will be generated depicting the
 # results of the tournament.
 #
-# Author::    Dave Thomas  (mailto:dave@x.y)
-# Copyright:: Copyright (c) 2002 The Pragmatic Programmers, LLC
-# License::   Distributes under the same terms as Ruby
+# Author::    Cyle Hunter
 
 # This class accepts a path to a CSV, parses the CSV into a collection of player
 # names and then passes the player names down the pipeline for bracket

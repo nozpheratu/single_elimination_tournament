@@ -8,7 +8,7 @@ describe Tournament::Bracket do
     context "given 4 players" do
       let(:players) { ["player"] * 4 }
 
-      it { puts bracket.tree ; is_expected.to eq 3 }
+      it { is_expected.to eq 3 }
     end
   end
 end

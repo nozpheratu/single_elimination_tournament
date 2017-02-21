@@ -1,6 +1,6 @@
-require_relative 'tournament/renderer'
 require_relative 'tournament/bracket'
 require_relative 'tournament/input'
+require_relative 'tournament/graph'
 require 'csv'
 require 'ap'
 
@@ -10,7 +10,7 @@ module Tournament
       contestants = parse_names(path)
       partial_bracket = Bracket.new(contestants)
       complete_bracket = Input.new(partial_bracket)
-      ap complete_bracket.tree
+      Graph.new(complete_bracket.tree)
     end
 
     private

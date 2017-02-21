@@ -1,0 +1,33 @@
+digraph 
+  {
+    label = "Single Elimination Tournament";
+    rankdir = LR;
+    labelloc="t";
+    node [ shape = box, colorscheme = pubu8, style = filled ];
+    edge [ arrowhead=none, arrowtail=none, style=bold ];
+    30906880             [ label = "Brighton Early\nvs.\nRob Banks",fillcolor = 1 ];
+    30906700             [ label = "Brighton Early\nvs.\nHowdy U. Wannit",fillcolor = 2 ];
+    30906860             [ label = "Chris Mass\nvs.\nLee Mealone",fillcolor = 1 ];
+    30906740             [ label = "Terry Bull\nvs.\nLee Mealone",fillcolor = 2 ];
+    30906840             [ label = "Ewan Whadarmy\nvs.\nWill Wynn",fillcolor = 1 ];
+    30906760             [ label = "Yuri Sponsible\nvs.\nEwan Whadarmy",fillcolor = 2 ];
+    30906820             [ label = "Anita Drink\nvs.\nWilly Byte",fillcolor = 1 ];
+    30906720             [ label = "Uta Bomb\nvs.\nWilly Byte",fillcolor = 2 ];
+    30906800             [ label = "Howdy U. Wannit\nvs.\nHolly Wood",fillcolor = 1 ];
+    30906640             [ label = "Willy Byte\nvs.\nEwan Whadarmy",fillcolor = 3 ];
+    30906660             [ label = "Brighton Early\nvs.\nTerry Bull",fillcolor = 3 ];
+    30906600             [ label = "Terry Bull\nvs.\nWilly Byte",fillcolor = 4 ];
+    "winner"             [ label = "Willy Byte",fillcolor = 2,fillcolor = 3,fillcolor = 4,fillcolor = 5 ];
+    30906880 -> 30906700;
+    30906860 -> 30906740;
+    30906840 -> 30906760;
+    30906820 -> 30906720;
+    30906800 -> 30906700;
+    30906760 -> 30906640;
+    30906740 -> 30906660;
+    30906720 -> 30906640;
+    30906700 -> 30906660;
+    30906660 -> 30906600;
+    30906640 -> 30906600;
+    30906600 -> "winner";
+  }

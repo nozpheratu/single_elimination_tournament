@@ -1,4 +1,6 @@
 module Tournament
+  # This class wraps a list of users and presents them such that they cannot be
+  # allocated to any given round twice.
   class PlayerPool
     attr_reader :players
 

@@ -1,4 +1,5 @@
 # single_elimination_tournament
+[![Build Status](https://travis-ci.org/nozpheratu/single_elimination_tournament.svg?branch=master)](https://travis-ci.org/nozpheratu/single_elimination_tournament)
 A Ruby CLI application for creating single elimination tournaments.
 
 ## usage

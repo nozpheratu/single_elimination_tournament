@@ -1,5 +1,17 @@
 require 'spec_helper'
-require 'ap'
+
+RSpec.shared_examples "a valid tree" do
+  let(:partial_tree) { double(tree: assigned_tree) }
+  it 'has no nil values' do
+    completed_tree = Tournament::Input.new(partial_tree).tree
+    expect(completed_tree).to_not include nil
+  end
+
+  it "has a winner_id is assigned on each match" do
+    completed_tree = Tournament::Input.new(partial_tree).tree
+    expect(completed_tree.map{|m| m[:winner_id]}.length).to eq assigned_tree.length
+  end
+end
 
 describe Tournament::Input do
   let(:partial_tree) { double(tree: assigned_tree) }
@@ -15,31 +27,14 @@ describe Tournament::Input do
     }
 
     context 'without byes' do
-      let(:assigned_tree) { tree }
-
-      it 'has no nil values' do
-        completed_tree = Tournament::Input.new(partial_tree).tree
-        expect(completed_tree).to_not include nil
-      end
-
-      it "has a winner_id is assigned on each match" do
-        completed_tree = Tournament::Input.new(partial_tree).tree
-        expect(completed_tree.map{|m| m[:winner_id]}.length).to eq assigned_tree.length
+      it_behaves_like "a valid tree" do
+        let(:assigned_tree) { tree }
       end
     end
 
     context 'with byes' do
-      let(:assigned_tree) { tree_with_byes }
-
-      it 'has no nil values' do
-        ap partial_tree
-        completed_tree = Tournament::Input.new(partial_tree).tree
-        expect(completed_tree).to_not include nil
-      end
-
-      it "has a winner_id is assigned on each match" do
-        completed_tree = Tournament::Input.new(partial_tree).tree
-        expect(completed_tree.map{|m| m[:winner_id]}.length).to eq assigned_tree.length
+      it_behaves_like "a valid tree" do
+        let(:assigned_tree) { tree_with_byes }
       end
     end
   end

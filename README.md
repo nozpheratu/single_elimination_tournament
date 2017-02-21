@@ -31,3 +31,8 @@ After each match outcome has been decided, a png, and svg graph will be generate
 results.
 
 ![graph](graph/graph.png)
+
+## Note on byes
+This project will automatically determine if byes to be added in order to complete the competition. See [Wikipedia Bye (sports)](https://en.wikipedia.org/wiki/Bye_(sports))
+for more details.
+

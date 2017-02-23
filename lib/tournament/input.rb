@@ -1,4 +1,3 @@
-require 'ap'
 require 'highline'
 require_relative './player_pool'
 
@@ -15,7 +14,7 @@ module Tournament
     def initialize(bracket)
       rounds = bracket.tree.group_by { |t| t[:round] }
       rounds.each do |round, matches|
-        ap "Round: #{round}"
+        puts "Round: #{round}"
         previous_round = rounds[round - 1] || []
         players = previous_round.map { |match| match[:winner] }
         player_pool = PlayerPool.new(players)

@@ -11,7 +11,7 @@ rake run[sample/contestants-even.csv]
 ```
 You will then be prompted to provide the outcome for a number of matches depending on how many players were listed in the csv.
 ```t
-"Round: 1"
+Round: 1
 1. Chris Mass
 2. Yuri Sponsible
 ?  1
@@ -24,7 +24,7 @@ You will then be prompted to provide the outcome for a number of matches dependi
 1. Rob Banks
 2. Ewan Whadarmy
 ?  2
-"Round: 2"
+Round: 2
 1. Holly Wood
 2. Uta Bomb
 ?  1

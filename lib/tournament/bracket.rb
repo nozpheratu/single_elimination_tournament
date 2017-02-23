@@ -40,14 +40,14 @@ module Tournament
       bye_pool = Tournament::PlayerPool.new(bye_pool_players)
       rounds << Array.new(@players_pool.remaining / 2) do
         {
-          round:  1,
+          round: 1,
           home:  @players_pool.take_random,
           away:  @players_pool.take_random
         }
       end
-      rounds << Array.new((byes + ((initial_count - byes)) / 2) / 2) do
+      rounds << Array.new((byes + (initial_count - byes) / 2) / 2) do
         {
-          round:  2,
+          round: 2,
           home:  bye_pool.take_random,
           away:  (bye_pool.take_random if bye_pool.remaining > rounds[0].length)
         }
@@ -68,7 +68,7 @@ module Tournament
       required_rounds.times do |i|
         rounds << Array.new(round_i /= 2) do
           {
-            round:  i + 1,
+            round: i + 1,
             home:  @players_pool.take_random,
             away:  @players_pool.take_random
           }

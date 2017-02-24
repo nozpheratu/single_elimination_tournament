@@ -3,7 +3,11 @@
 
 A Ruby CLI application for creating single elimination tournaments.
 
-## usage
+## Requirements
+- ruby 2x
+- graphviz
+
+## Usage
 Simply clone the project, run bundler, and execute the included rake task with a path to line-delimited list of players, sample csvs are
 provided in the *sample* folder.
 ```

@@ -2,9 +2,9 @@ require 'highline'
 require_relative './player_pool'
 
 module Tournament
-  # This class is responsible for filling in all the blanks for the tournament
-  # a passed partial bracket. Blank data includes any matches there were
-  # determined to be necessary but weren't assiged a player (either home or
+  # This class is responsible for filling in all the blanks for the supplied
+  # partial tournament bracket. Blank data includes any matches that were
+  # determined to be necessary, but weren't assiged a player (either home or
   # away) - player assignment will occur automatically. This class will also
   # prompt the user to decide on the outcome for every match in the bracket
   # using a CLI.
